@@ -1,0 +1,21 @@
+{
+  "lastProcessedRow": 0,
+  "lastProcessedDate": "",
+  "dailyMessageCount": 0,
+  "totalMessagesSent": 0,
+  "totalMessagesDelivered": 0,
+  "totalMessagesRead": 0,
+  "totalReplies": 0,
+  "totalFailures": 0,
+  "currentSession": {
+    "startTime": "",
+    "messagesSent": 0,
+    "lastMessageTime": ""
+  },
+  "stats": {
+    "deliveryRate": 0,
+    "readRate": 0,
+    "replyRate": 0,
+    "averageResponseTime": 0
+  }
+} 

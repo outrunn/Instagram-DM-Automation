@@ -1,0 +1,46 @@
+{
+  "templates": [
+    {
+      "id": "professional_networking",
+      "name": "Professional Networking",
+      "content": "Hey {username}! 👋 I came across your profile and was really impressed by your work in {profession}. Your {bio_highlight} caught my attention. Would love to connect and potentially collaborate on some exciting projects. What do you think?",
+      "category": "networking",
+      "priority": 1
+    },
+    {
+      "id": "collaboration_offer",
+      "name": "Collaboration Offer",
+      "content": "Hi {name}! 🔥 Your content is absolutely amazing! I'm looking to collaborate with talented creators like you in the {profession} space. Your {bio_highlight} shows we could create something incredible together. Interested in exploring a partnership?",
+      "category": "collaboration",
+      "priority": 2
+    },
+    {
+      "id": "industry_insights",
+      "name": "Industry Insights",
+      "content": "Hey {username}! 💡 I've been following your journey in {profession} and love how you approach {bio_highlight}. I'm working on some exciting projects in this space and would love to share insights. Would you be interested in a quick chat?",
+      "category": "insights",
+      "priority": 3
+    },
+    {
+      "id": "community_building",
+      "name": "Community Building",
+      "content": "Hello {name}! 🌟 I'm building a community of amazing {profession} professionals and your profile stood out. Your {bio_highlight} shows you'd be a perfect fit. Would love to have you join our network!",
+      "category": "community",
+      "priority": 4
+    },
+    {
+      "id": "value_proposition",
+      "name": "Value Proposition",
+      "content": "Hi {username}! 🚀 I noticed your expertise in {profession} and think I could add real value to what you're doing. Your {bio_highlight} inspired me to reach out. Would you be open to a quick call to discuss potential opportunities?",
+      "category": "value",
+      "priority": 5
+    }
+  ],
+  "fallback": "Hey {username}! 👋 I came across your profile and would love to connect. Your work looks amazing!",
+  "variables": {
+    "username": "Instagram username",
+    "name": "Display name or first name",
+    "profession": "Professional field/industry",
+    "bio_highlight": "Key highlight from bio"
+  }
+} 

@@ -1,0 +1,40 @@
+{
+  "rateLimiting": {
+    "dailyLimit": 50,
+    "minDelayMinutes": 2,
+    "maxDelayMinutes": 5,
+    "typingDelaySeconds": 3,
+    "maxRetries": 3,
+    "retryDelayMinutes": 30
+  },
+  "timeRestrictions": {
+    "startHour": 9,
+    "endHour": 21,
+    "timezone": "local",
+    "avoidWeekends": false
+  },
+  "filters": {
+    "maxFollowers": 10000,
+    "minLeadScore": 7,
+    "excludeProfessions": ["spam", "bot", "fake"],
+    "includeProfessions": []
+  },
+  "behavior": {
+    "simulateTyping": true,
+    "randomDelays": true,
+    "humanPauses": true,
+    "varyMessageLength": true
+  },
+  "monitoring": {
+    "discordNotifications": true,
+    "logLevel": "info",
+    "trackMetrics": true,
+    "saveScreenshots": false
+  },
+  "instagram": {
+    "maxMessageLength": 1000,
+    "useEmojis": true,
+    "includeOptOut": true,
+    "optOutMessage": "Reply 'STOP' to unsubscribe"
+  }
+} 
