@@ -8,6 +8,7 @@
     "build": "tsc",
     "start": "node dist/main.js",
     "dev": "tsx src/main.ts",
+    "login": "tsx src/scripts/manualLogin.ts",
     "test-connection": "tsx src/scripts/testDmConnection.ts",
     "send-test": "tsx src/scripts/sendTestMessage.ts",
     "stats": "tsx src/scripts/logDmStats.ts",

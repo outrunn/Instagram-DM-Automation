@@ -25,6 +25,8 @@ export class BrowserManager {
           '--disable-renderer-backgrounding',
           '--disable-features=TranslateUI',
           '--disable-ipc-flooding-protection',
+          '--disable-web-security',
+          '--disable-features=VizDisplayCompositor',
           '--user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
         ]
       });
@@ -40,8 +42,7 @@ export class BrowserManager {
           'Accept-Encoding': 'gzip, deflate, br',
           'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
           'DNT': '1',
-          'Connection': 'keep-alive',
-          'Upgrade-Insecure-Requests': '1'
+          'Connection': 'keep-alive'
         }
       });
 
@@ -62,21 +63,58 @@ export class BrowserManager {
         const originalQuery = window.navigator.permissions.query;
         window.navigator.permissions.query = (parameters) => (
           parameters.name === 'notifications' ?
-            Promise.resolve({ state: Notification.permission }) :
+            Promise.resolve({ state: 'default' }) :
             originalQuery(parameters)
         );
+        
+        Object.defineProperty(window, 'chrome', {
+          writable: true,
+          enumerable: true,
+          configurable: false,
+          value: {
+            runtime: {}
+          }
+        });
+        
+        const getParameter = WebGLRenderingContext.getParameter;
+        WebGLRenderingContext.prototype.getParameter = function(parameter) {
+          if (parameter === 37445) {
+            return 'Intel Inc.';
+          }
+          if (parameter === 37446) {
+            return 'Intel Iris OpenGL Engine';
+          }
+          return getParameter(parameter);
+        };
       `);
 
       this.page = await this.context.newPage();
       
-      // Set additional headers
+      // Set additional headers without problematic ones
       await this.page.setExtraHTTPHeaders({
         'Accept-Language': 'en-US,en;q=0.9',
         'Accept-Encoding': 'gzip, deflate, br',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
         'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1'
+        'Connection': 'keep-alive'
+      });
+
+      // Block unnecessary requests to improve performance and reduce detection
+      await this.page.route('**/*', (route) => {
+        const url = route.request().url();
+        const resourceType = route.request().resourceType();
+        
+        if (resourceType === 'image' && (
+          url.includes('ads') || 
+          url.includes('analytics') || 
+          url.includes('tracking') ||
+          url.includes('doubleclick') ||
+          url.includes('googletagmanager')
+        )) {
+          route.abort();
+        } else {
+          route.continue();
+        }
       });
 
       logger.info('✅ Browser initialized successfully');
